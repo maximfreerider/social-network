@@ -1,11 +1,20 @@
 'endpoints'
+register creds:
+    {
+        "username": "",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "password": "",
+        "password_confirm": ""
+    }
 flow of application:
     /accounts/register/ - реєструємось 'POST'
-    /token/ - (body = {username, password}) 'POST'
+    /token/ - (body = {username, password}) 'POST' +
     (у всі наступні запити в хедери додаємо наш токен Authorization: Bearer + access token )
     /api/v1/tweets/ -
-        'POST' - (body) -> create new tweet
-        'GET' -> return all tweets
-    /api/v1/tweets/<int:id>/like/ 'POST'
-    /api/v1/tweets/<int:id>/unlike/ 'POST'
-    /api/v1/tweets/<int:id>/unlike/
+        'POST' - (body) -> create new tweet +
+        'GET' -> return all tweets +
+    /api/v1/tweets/<int:id>/like/ 'POST' +
+    /api/v1/tweets/<int:id>/unlike/ 'POST' +
+    /api/v1/tweets/1/fans/ 'GET' -> return all users who likes the tweet +

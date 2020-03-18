@@ -1,13 +1,10 @@
-from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 from .models import Like
 
-# User = get_user_model()
-
 
 def add_like(obj, user):
-    """лайкаю obj"""
+    """like an obj"""
     obj_type = ContentType.objects.get_for_model(obj)
     like, is_created = Like.objects.get_or_create(
         content_type=obj_type,
@@ -26,7 +23,7 @@ def remove_like(obj, user):
 
 
 def is_fan(obj, user) -> bool:
-    """проверяю лайкнул ли пользователь(user) -> obj"""
+    """check if user('user') liked -> obj"""
     if not user.is_authenticated:
         return False
     obj_type = ContentType.objects.get_for_model(obj)
@@ -39,7 +36,7 @@ def is_fan(obj, user) -> bool:
 
 
 def get_fans(obj):
-    """Поучаем все пользователей которые лайкнули 'obj' """
+    """ return all users who liked an 'obj' """
     obj_type = ContentType.objects.get_for_model(obj)
     return User.objects.filter(
         likes__content_type=obj_type,
